@@ -40,7 +40,7 @@ Important notice: please review the content of your `mycertandkey.crt` file and 
 ## Advanced configuration
 
 ### Error handling
-When an is sent back from the Mobile ID it will display the `APP_ERROR_DEFAULT` unless it has explicitly been defined in the `language/xx/xx.ini` file.
+When an error is sent back from the Mobile ID it will display the `APP_ERROR_DEFAULT` unless it has explicitly been defined in the `language/xx/xx.ini` file.
 
 By default, the error is of type `error` (Red) related to a Mobile ID failure. For relevant errors, where the Mobile ID user can be helped the error type will be `warning` (Yellow).
 Here the list of `warning` errors defined in `helpers/mobileid.php`:
