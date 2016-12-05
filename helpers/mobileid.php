@@ -157,8 +157,13 @@ class mobileid {
             )
          );
 
-        $this->client->__setLocation($this->base_url . '/soap/services/MSS_ProfilePort');
-        $ok = $this->__doCall('MSS_ProfileQuery', $params);
+	if (isSet($this->proxy_host)) {
+            $this->client->__setLocation($this->base_url . '/soap/services/MSS_ProfilePort');
+            $ok = $this->__doCall('MSS_ProfileQuery', $params);
+        }
+        else {
+            $ok=false;
+        }
 
         return($ok);
     }
