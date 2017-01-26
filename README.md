@@ -4,13 +4,13 @@ mobileid-helper
 A helper application to check the status about a Mobile ID user.
 
 ## Requirements
-* PHP 5.3.x
+* PHP 7.1.x
 * PHP Soap
+* PHP XML
 
 ## Install
 Download the package and make it available to your web server.
 Example: `git clone <URL> /var/www/mobileid`
-
 
 ## Configuration
 * Rename the configuration file example from `conf/configuration.example.php` to `conf/configuration.php`
