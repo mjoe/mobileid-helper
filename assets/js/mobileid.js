@@ -114,25 +114,20 @@ function submitFormValues() {
 
 	jQuery.ajax({
 		url: ajax_url,
-		success: function(data) {
-			jQuery('#msg_result').addClass('success');
-			jQuery('#msg_result').html(data);
-
-			jQuery('#msg_result').show();
-			jQuery('#msg_wait').hide();
-			
-			endSubmit();
-		},
-		error: function(data) {
-			if (data.status == '400') {
+		success: function(data, textStatus, request) {
+    	if (request.getResponseHeader('MID-Class') == '900') {
 				jQuery('#msg_result').addClass('error');
-				jQuery('#msg_result').html(data.responseText);
 			}
 
-			if (data.status == '401') {
+			else if (request.getResponseHeader('MID-Class') == '901') {
 				jQuery('#msg_result').addClass('warning');
-				jQuery('#msg_result').html(data.responseText);
 			}
+    
+      else {
+        jQuery('#msg_result').addClass('success');
+      }
+      
+      jQuery('#msg_result').html(data);
 
 			jQuery('#msg_result').show();
 			jQuery('#msg_wait').hide();

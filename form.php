@@ -100,10 +100,8 @@ function setMobileIdError($mobileIdRequest, $app, $lang = 'en', $msg_prob = '') 
 		$msg .= "<p><strong>".$app->getText('APP_ERROR_PROBLEM')."</strong> ".$msg_prob."</p>";
 		$msg .= "<p><strong>".$app->getText('APP_ERROR_SOLUTION')."</strong> ".$support_txt."</p>";
 
-
 		header('Content-Type: text/html; charset=utf-8');
-		header('Status : 401 '.$msg);
-		header('HTTP/1.0 401 '.$msg);
+    header('MID-Class: 901');
 
 		echo $msg;
 		return false;
@@ -114,8 +112,7 @@ function setMobileIdError($mobileIdRequest, $app, $lang = 'en', $msg_prob = '') 
 	$msg .= "<p><strong>".$app->getText('APP_ERROR_SOLUTION')."</strong> /etsi:_".$mobileIdRequest->response_error_code." -> ".$mobileIdRequest->statusdetail."</p>";
 
 	header('Content-Type: text/html; charset=utf-8');
-	header('Status : 400 '.$msg);
-	header('HTTP/1.0 400 '.$msg);
+	header('MID-Class: 900');
 
 	echo $msg;
 

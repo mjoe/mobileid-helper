@@ -61,10 +61,11 @@ class mobileid {
             'encoding' => 'UTF-8',
             'soap_version' => SOAP_1_2,
             'local_cert' => $ap_cert,
-            'connection_timeout' => self::TIMEOUT_CON,
             'stream_context' => $context
             );
         if (isSet($myOpts)) $options = array_merge($options, (array)$myOpts);
+        
+        ini_set("default_socket_timeout", self::TIMEOUT_CON); 
 
         /* Check for provided files existence */
         if (!file_exists($ap_cert)) trigger_error('mobileid::construct: file not found ' . $ap_cert, E_USER_WARNING);
