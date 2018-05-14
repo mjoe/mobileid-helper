@@ -2,6 +2,7 @@ mobileid-helper
 ===============
 
 A helper application to check the status about a Mobile ID user.
+![Screenshot](assets/img/screenshot.png?raw=true "Screenshot")
 
 ## Requirements
 * PHP 7.1.x
