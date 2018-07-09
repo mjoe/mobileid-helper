@@ -60,7 +60,7 @@ Example with:
 	public $mid_msg_service = "service.com";
 	public $mid_msg_en = "Allow testing of your Mobile ID?";
 ````
-Will produce following message in english: "service.com: Allow testing of your Mobile ID?" 
+Will produce following message in english: "service.com: Allow testing of your Mobile ID?"
 
 
 If 'conf/configuration.php:$mid_msg_allowedit' is set, then then this message can be edited before sending.
@@ -69,6 +69,6 @@ If 'conf/configuration.php:$mid_msg_allowedit' is set, then then this message ca
 The actual resources are translated in EN, DE, FR, IT. Refer to the files in the `language/` folders.
 
 ### Language detection
-The application detects the current browser language and uses it. If the detected language is not supported it will fallback to english.  
-With the ?lang parameter the detection can be turned off and a specific language can be enforced.  
+The application detects the current browser language and uses it. If the detected language is not supported it will fallback to english.
+With the ?lang parameter the detection can be turned off and a specific language can be enforced.
 Example http://webserver/mobileid?lang=fr to force the usage of the french language.
