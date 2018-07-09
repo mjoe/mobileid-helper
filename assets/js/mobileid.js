@@ -7,18 +7,18 @@
  */
 
 jQuery(document).ready(function() {
-
+	
 	// Remove value from the forms
 	jQuery('#submit_btn_remove').click(function() {
 		setRemoveFormValues();
-	});
+	});	
 
 	// Submit the form
-	jQuery('#submit_btn_send').click(function() {
+	jQuery('#submit_btn_send').click(function() {		
 		prepareSubmit();
 		submitFormValues();
 	});
-
+	
 	jQuery("#container").bind("keypress", function(e) {
 		if (e.keyCode == 13) {
 			prepareSubmit();
@@ -26,10 +26,10 @@ jQuery(document).ready(function() {
 			return false;
 		}
 	});
-
+	
 	jQuery('#mid_lang_zone').click(function() {
 		var placeholder = jQuery("#mid_msg").attr("placeholder");
-
+		
 		if (!placeholder.length) {
 			return;
 		}
@@ -41,7 +41,7 @@ jQuery(document).ready(function() {
 });
 
 function setRemoveFormValues() {
-
+	
 	// Set form field empty
 	jQuery('#mid_phone').val('');
 	jQuery('#mid_msg').val('');
@@ -51,12 +51,12 @@ function setRemoveFormValues() {
 	jQuery("#msg_result").removeClass("success");
 	jQuery("#msg_result").removeClass("error");
 	jQuery("#msg_result").removeClass("warning");
-
+	
 	// Hide waiting, error & result messages
 	jQuery('#msg_wait').hide();
 	jQuery('#msg_error').hide();
 	jQuery('#msg_result').hide();
-
+	
 	// Check the default language
 	jQuery('input[name="mid_lang"]').prop('checked', false);
 	jQuery("#mid_lang_"+jQuery('#mid_lang_default').val()).trigger("click");
@@ -70,7 +70,7 @@ function prepareSubmit() {
 	// Show waiting message
 	jQuery('#msg_wait').show();
 	jQuery('#msg_error').hide();
-	jQuery('#msg_result').hide();
+	jQuery('#msg_result').hide();	
 
 	// Remove class for message result
 	jQuery("#msg_result").removeClass("success");
@@ -89,7 +89,7 @@ function endSubmit() {
 }
 
 function submitFormValues() {
-
+		
 	// Prepare the ajax/json request
 	var mid_phone = jQuery('#mid_phone').val();
 	var mid_lang  = jQuery('input:radio[name=mid_lang]:checked').val();
@@ -102,51 +102,46 @@ function submitFormValues() {
 	jsonRequest = '{';
 	jsonRequest = jsonRequest+'"mid_phone":"'+mid_phone+'"';
 	jsonRequest = jsonRequest+',"mid_lang":"'+mid_lang+'"';
-
+	
 	if (mid_msg.length > 0) {
 		jsonRequest = jsonRequest+',"mid_msg":"'+encodeURIComponent(mid_msg)+'"';
 	}
-
+	
 	jsonRequest = jsonRequest+'}';
-
+	
 	ajax_url = 'form.php?request='+jsonRequest;
 	ajax_url = ajax_url+'&lang='+lang;
 
 	jQuery.ajax({
 		url: ajax_url,
-		success: function(data) {
-			jQuery('#msg_result').addClass('success');
-			jQuery('#msg_result').html(data);
-
-			jQuery('#msg_result').show();
-			jQuery('#msg_wait').hide();
-
-			endSubmit();
-		},
-		error: function(data) {
-			if (data.status == '400') {
+		success: function(data, textStatus, request) {
+    	if (request.getResponseHeader('MID-Class') == '900') {
 				jQuery('#msg_result').addClass('error');
-				jQuery('#msg_result').html(data.responseText);
 			}
 
-			if (data.status == '401') {
+			else if (request.getResponseHeader('MID-Class') == '901') {
 				jQuery('#msg_result').addClass('warning');
-				jQuery('#msg_result').html(data.responseText);
 			}
+    
+      else {
+        jQuery('#msg_result').addClass('success');
+      }
+      
+      jQuery('#msg_result').html(data);
 
 			jQuery('#msg_result').show();
 			jQuery('#msg_wait').hide();
-
+			
 			endSubmit();
 		}
 	});
 }
 
 function getDefaultMessage() {
-
+	
 	var checked_lang = jQuery('input:radio[name=mid_lang]:checked').val();
 	var ajax_url;
-
+	
 	ajax_url = 'form.php?request=default_msg';
 	ajax_url = ajax_url+'&lang='+checked_lang;
 
