@@ -16,8 +16,8 @@ class mobileIdConfig {
  	public $ap_pwd = "disabled";
 	// Certificate/key that is allowed to access the service
 	public $ap_cert = "conf/mycertandkey.crt";
-  /* Optional Password when using an encrpyted key with $ap_cert */
-  //public $ap_cert_pwd = "password";
+	/* Optional Password when using an encrpyted key with $ap_cert */
+	//public $ap_cert_pwd = "password";
 
 	/* Client certificate configuration */
 	// Location of Certificate Authority file which should be used to authenticate the identity of the remote peer
